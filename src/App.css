@@ -1,16 +1,16 @@
 .page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.4rem 1.1rem 3rem;
+  max-width: none;
+  margin: 0;
+  padding: 0.4rem 0.55rem 0.7rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.85rem;
+  align-items: stretch;
+  gap: 0.4rem;
 }
 
 .intro {
-  text-align: center;
-  max-width: 40rem;
+  text-align: start;
+  max-width: none;
   width: 100%;
 }
 
@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.15rem;
 }
 
 .eyebrow {
@@ -34,29 +34,29 @@
 h1 {
   margin: 0;
   font-family: Fraunces, Georgia, serif;
-  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-size: 1.35rem;
   font-weight: 650;
   letter-spacing: -0.02em;
 }
 
 .lede {
-  margin: 0.45rem 0 0;
-  line-height: 1.45;
+  margin: 0.2rem 0 0;
+  line-height: 1.35;
   color: #5c5348;
-  font-size: 0.95rem;
+  font-size: 0.78rem;
 }
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(280px, 540px) minmax(260px, 1fr);
-  gap: 18px;
-  width: min(96vw, 1180px);
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 8px;
+  width: 100%;
   align-items: start;
 }
 
 .selection {
-  width: min(96vw, 1180px);
-  min-height: 4.5rem;
+  width: 100%;
+  min-height: 0;
 }
 
 .selection-head {
@@ -70,7 +70,7 @@ h1 {
 .selection h2 {
   margin: 0;
   font-family: Fraunces, Georgia, serif;
-  font-size: 1.45rem;
+  font-size: 1rem;
   font-weight: 650;
   display: flex;
   align-items: center;
@@ -118,12 +118,12 @@ h1 {
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 6px 6px 6px 10px;
-  font-size: 14px;
+  padding: 3px 4px 3px 8px;
+  font-size: 12px;
   cursor: pointer;
 }
 
@@ -159,13 +159,8 @@ h1 {
   background: #eadfcf;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 720px) {
   .workspace {
     grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .selection {
-    width: min(94vw, 540px);
   }
 }

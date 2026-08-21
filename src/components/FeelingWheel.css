@@ -1,8 +1,9 @@
 .wheel-wrap {
   position: relative;
-  width: 100%;
-  max-width: 540px;
-  filter: drop-shadow(0 14px 28px rgba(70, 50, 20, 0.1));
+  width: min(100%, calc(100dvh - 8.2rem));
+  max-width: none;
+  justify-self: start;
+  filter: drop-shadow(0 10px 20px rgba(70, 50, 20, 0.1));
 }
 
 .wheel {
