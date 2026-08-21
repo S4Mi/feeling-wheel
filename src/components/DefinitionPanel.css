@@ -1,7 +1,9 @@
 .define {
   flex: 0 0 252px;
   width: 252px;
-  max-height: 100%;
+  align-self: stretch;
+  margin: 8px 0;
+  max-height: none;
   overflow: auto;
   background: var(--card);
   border: 1px solid var(--line);

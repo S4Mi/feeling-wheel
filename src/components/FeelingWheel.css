@@ -4,18 +4,16 @@
   min-width: 0;
   min-height: 0;
   height: 100%;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
+  container-type: size;
+  display: grid;
+  place-items: start start;
   filter: drop-shadow(0 10px 20px rgba(70, 50, 20, 0.1));
 }
 
 .wheel {
   display: block;
-  height: 100%;
-  width: auto;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
+  width: min(100cqw, 100cqh);
+  height: min(100cqw, 100cqh);
   cursor: pointer;
   user-select: none;
 }
