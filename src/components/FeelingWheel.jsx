@@ -7,9 +7,9 @@ const SIZE = 960
 const CX = SIZE / 2
 const CY = SIZE / 2
 const RINGS = [
-  { inner: 96, outer: 214 },
-  { inner: 214, outer: 328 },
-  { inner: 328, outer: 468 },
+  { inner: 88, outer: 198 },
+  { inner: 198, outer: 328 },
+  { inner: 328, outer: 470 },
 ]
 
 function polar(r, angle) {
@@ -42,18 +42,29 @@ function radialRotate(mid, x) {
   return rotate
 }
 
+function alongRadius(mid, dist) {
+  return polar(dist, mid)
+}
+
+function acrossWedge(x, y, dist) {
+  const ux = x - CX
+  const uy = y - CY
+  const len = Math.hypot(ux, uy) || 1
+  return [x + (-uy / len) * dist, y + (ux / len) * dist]
+}
+
 function fontSize(seg, r, translated, showBoth) {
   const arc = (Math.abs(seg.end - seg.start) * Math.PI) / 180 * r
+  const radial = RINGS[seg.level].outer - RINGS[seg.level].inner
   const longest = Math.max(seg.label.length, showBoth ? translated.length : 0, 4)
-  if (seg.level === 2) {
-    const radial = RINGS[2].outer - RINGS[2].inner
-    const along = radial / (longest * 0.58)
-    const across = arc * 0.42
-    return Math.max(10, Math.min(15.5, along, across))
+  if (seg.level >= 1) {
+    const along = radial / (longest * 0.62)
+    const across = arc * (showBoth ? 0.26 : 0.4)
+    const max = seg.level === 1 ? 13 : 12
+    return Math.max(7.5, Math.min(max, along, across))
   }
-  const max = seg.level === 0 ? 19 : 14
-  const min = seg.level === 0 ? 12 : 10
-  return Math.max(min, Math.min(max, (arc / longest) * 1.35))
+  const max = showBoth ? 15 : 18
+  return Math.max(11, Math.min(max, (arc / longest) * 1.2))
 }
 
 function canFitTranslation(seg, translated) {
@@ -61,27 +72,34 @@ function canFitTranslation(seg, translated) {
   const { inner, outer } = RINGS[seg.level]
   const r = (inner + outer) / 2
   const arc = (Math.abs(seg.end - seg.start) * Math.PI) / 180 * r
-  const radial = outer - inner
   if (seg.level === 0) return true
-  if (seg.level === 1) return arc > 78 && radial > 88 && translated.length <= 16
-  return radial > 118 && translated.length <= 12 && arc > 42
+  if (seg.level === 1) return arc > 36 && translated.length <= 12
+  return arc > 30 && translated.length <= 10
 }
 
 function SliceLabel({ seg, translated, showBoth, ink }) {
   const { inner, outer } = RINGS[seg.level]
   const mid = midAngle(seg)
-  const radial = outer - inner
-  const isLeaf = seg.level === 2
-  const rMain = showBoth
-    ? inner + radial * (isLeaf ? 0.34 : 0.38)
-    : (inner + outer) / 2
-  const rAlt = inner + radial * (isLeaf ? 0.7 : 0.7)
-  const [x, y] = polar(rMain, mid)
-  const [tx, ty] = polar(rAlt, mid)
-  const rotate = isLeaf ? radialRotate(mid, x) : tangentRotate(mid)
+  const r = (inner + outer) / 2
+  const [cx, cy] = polar(r, mid)
+  const radial = seg.level >= 1
+  const rotate = radial ? radialRotate(mid, cx) : tangentRotate(mid)
   const english = seg.level === 0 ? seg.label.toUpperCase() : seg.label
-  const size = fontSize(seg, rMain, translated ?? '', showBoth)
-  const tSize = Math.max(9, size * 0.82)
+  const size = fontSize(seg, r, translated ?? '', showBoth)
+  const tSize = Math.max(7, size * 0.78)
+  const gap = showBoth ? size * 0.58 : 0
+
+  let x = cx
+  let y = cy
+  let tx = cx
+  let ty = cy
+  if (showBoth && radial) {
+    ;[x, y] = acrossWedge(cx, cy, -gap)
+    ;[tx, ty] = acrossWedge(cx, cy, gap)
+  } else if (showBoth) {
+    ;[x, y] = alongRadius(mid, r - gap)
+    ;[tx, ty] = alongRadius(mid, r + gap)
+  }
 
   return (
     <>
@@ -107,7 +125,7 @@ function SliceLabel({ seg, translated, showBoth, ink }) {
           fontSize={tSize}
           textAnchor="middle"
           dominantBaseline="middle"
-          opacity="0.9"
+          opacity="0.88"
         >
           {translated}
         </text>
@@ -126,8 +144,6 @@ export default function FeelingWheel({
   const [hoveredId, setHoveredId] = useState(null)
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds])
   const hovered = segments.find((s) => s.id === hoveredId) ?? null
-  const hoverTranslation = hovered ? translate(hovered.label, lang) : null
-  const showHoverCard = Boolean(hovered && hoverTranslation && !canFitTranslation(hovered, hoverTranslation))
 
   const byLevel = useMemo(() => {
     const groups = [[], [], []]
@@ -153,8 +169,7 @@ export default function FeelingWheel({
             const selected = selectedSet.has(seg.id)
             const relatedHover = related(hoveredId, seg.id)
             const lit = selected || relatedHover
-            const dim =
-              (hoveredId || selectedSet.size > 0) && !lit
+            const dim = (hoveredId || selectedSet.size > 0) && !lit
             const translated = translate(seg.label, lang)
             const showBoth = canFitTranslation(seg, translated)
             return (
@@ -194,31 +209,24 @@ export default function FeelingWheel({
           }),
         )}
         <circle cx={CX} cy={CY} r={RINGS[0].inner - 2} fill="#fffdf8" />
-        <text className="hub-kicker" x={CX} y={CY - 14} textAnchor="middle">
+        <text className="hub-kicker" x={CX} y={CY - 12} textAnchor="middle">
           I feel
         </text>
         <text
           className="hub-word"
           x={CX}
-          y={CY + 12}
+          y={CY + 10}
           textAnchor="middle"
-          fontSize={hub && hub.label.length > 12 ? 16 : 22}
+          fontSize={hub && hub.label.length > 12 ? 15 : 20}
         >
           {hub?.label ?? '…'}
         </text>
         {hub && translate(hub.label, lang) && (
-          <text className="hub-tr" x={CX} y={CY + 34} textAnchor="middle">
+          <text className="hub-tr" x={CX} y={CY + 30} textAnchor="middle">
             {translate(hub.label, lang)}
           </text>
         )}
       </svg>
-
-      {showHoverCard && (
-        <div className="hover-card" role="status">
-          <strong>{hovered.label}</strong>
-          <span>{hoverTranslation}</span>
-        </div>
-      )}
     </div>
   )
 }

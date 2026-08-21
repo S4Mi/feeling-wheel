@@ -42,15 +42,16 @@ export default function App() {
         </p>
       </header>
 
-      <FeelingWheel
-        segments={segments}
-        selectedIds={selectedIds}
-        onToggle={toggle}
-        lang={lang}
-        onHover={setFocusId}
-      />
-
-      <DefinitionPanel segment={focused} lang={lang} />
+      <div className="workspace">
+        <FeelingWheel
+          segments={segments}
+          selectedIds={selectedIds}
+          onToggle={toggle}
+          lang={lang}
+          onHover={setFocusId}
+        />
+        <DefinitionPanel segment={focused} lang={lang} />
+      </div>
 
       <section className="selection" aria-live="polite">
         {selected.length === 0 ? (

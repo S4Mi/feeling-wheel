@@ -1,7 +1,8 @@
 .wheel-wrap {
   position: relative;
-  width: min(94vw, 900px);
-  filter: drop-shadow(0 18px 40px rgba(70, 50, 20, 0.12));
+  width: 100%;
+  max-width: 540px;
+  filter: drop-shadow(0 14px 28px rgba(70, 50, 20, 0.1));
 }
 
 .wheel {
@@ -59,35 +60,7 @@
 
 .hub-tr {
   fill: #6d655c;
-  font-size: 13px;
+  font-size: 12px;
   font-family: Nunito, Vazirmatn, sans-serif;
   font-weight: 700;
-}
-
-.hover-card {
-  position: absolute;
-  left: 50%;
-  top: 12px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  background: #fffdf8;
-  border: 1px solid #e4d9c8;
-  border-radius: 999px;
-  padding: 8px 14px;
-  box-shadow: 0 10px 24px rgba(70, 50, 20, 0.12);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.hover-card strong {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 16px;
-}
-
-.hover-card span {
-  color: #6d655c;
-  font-weight: 700;
-  font-size: 14px;
 }

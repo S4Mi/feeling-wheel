@@ -1,9 +1,11 @@
 .define {
-  width: min(94vw, 900px);
+  width: 100%;
+  max-height: min(72vh, 540px);
+  overflow: auto;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 22px 24px 18px;
+  border-radius: 16px;
+  padding: 14px 16px 12px;
   box-shadow: 0 10px 30px rgba(70, 50, 20, 0.06);
   text-align: start;
 }
@@ -26,7 +28,7 @@
 
 .define h2 {
   margin: 0;
-  font-size: 1.85rem;
+  font-size: 1.35rem;
   letter-spacing: -0.03em;
 }
 
@@ -44,7 +46,7 @@
 }
 
 .pos-group {
-  margin: 0 0 16px;
+  margin: 0 0 10px;
 }
 
 .pos-group h3 {
@@ -59,9 +61,10 @@
 
 .senses {
   margin: 0;
-  padding: 0 0 0 1.15rem;
+  padding: 0 0 0 1.1rem;
   display: grid;
-  gap: 12px;
+  gap: 8px;
+  font-size: 0.9rem;
 }
 
 .senses p {
@@ -87,9 +90,9 @@
 }
 
 .define-prompt {
-  margin: 8px 0 10px;
+  margin: 6px 0 8px;
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .define-links {

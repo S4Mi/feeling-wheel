@@ -36,7 +36,7 @@ export default function DefinitionPanel({ segment, lang }) {
             <div className="pos-group" key={group.pos}>
               <h3>{group.pos}</h3>
               <ol className="senses">
-                {group.senses.map((sense) => (
+                {group.senses.slice(0, 2).map((sense) => (
                   <li key={sense.definition}>
                     <p>{sense.definition}</p>
                     {sense.examples?.map((example) => (

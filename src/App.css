@@ -1,11 +1,11 @@
 .page {
-  max-width: 980px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2.25rem 1.25rem 4rem;
+  padding: 1.4rem 1.1rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.85rem;
 }
 
 .intro {
@@ -34,20 +34,29 @@
 h1 {
   margin: 0;
   font-family: Fraunces, Georgia, serif;
-  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
   font-weight: 650;
   letter-spacing: -0.02em;
 }
 
 .lede {
-  margin: 0.7rem 0 0;
-  line-height: 1.5;
+  margin: 0.45rem 0 0;
+  line-height: 1.45;
   color: #5c5348;
+  font-size: 0.95rem;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 540px) minmax(260px, 1fr);
+  gap: 18px;
+  width: min(96vw, 1180px);
+  align-items: start;
 }
 
 .selection {
-  width: min(94vw, 900px);
-  min-height: 6.5rem;
+  width: min(96vw, 1180px);
+  min-height: 4.5rem;
 }
 
 .selection-head {
@@ -148,4 +157,15 @@ h1 {
 
 .chip-x:hover {
   background: #eadfcf;
+}
+
+@media (max-width: 860px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .selection {
+    width: min(94vw, 540px);
+  }
 }
