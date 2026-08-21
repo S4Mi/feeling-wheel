@@ -1,0 +1,93 @@
+.wheel-wrap {
+  position: relative;
+  width: min(94vw, 900px);
+  filter: drop-shadow(0 18px 40px rgba(70, 50, 20, 0.12));
+}
+
+.wheel {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slice {
+  transition: opacity 160ms ease;
+}
+
+.slice.dim {
+  opacity: 0.34;
+}
+
+.slice.selected path {
+  stroke: #1c1915;
+  stroke-opacity: 0.35;
+}
+
+.slice:focus-visible path {
+  stroke: #1c1915;
+  stroke-width: 3.6;
+}
+
+.slice-en,
+.slice-tr {
+  font-family: Nunito, Vazirmatn, sans-serif;
+  font-weight: 800;
+  pointer-events: none;
+  letter-spacing: 0.01em;
+}
+
+.slice-tr {
+  font-weight: 700;
+}
+
+.hub-kicker {
+  fill: #8a7b68;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: Nunito, sans-serif;
+  font-weight: 700;
+}
+
+.hub-word {
+  fill: #2b241c;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 650;
+}
+
+.hub-tr {
+  fill: #6d655c;
+  font-size: 13px;
+  font-family: Nunito, Vazirmatn, sans-serif;
+  font-weight: 700;
+}
+
+.hover-card {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: #fffdf8;
+  border: 1px solid #e4d9c8;
+  border-radius: 999px;
+  padding: 8px 14px;
+  box-shadow: 0 10px 24px rgba(70, 50, 20, 0.12);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hover-card strong {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 16px;
+}
+
+.hover-card span {
+  color: #6d655c;
+  font-weight: 700;
+  font-size: 14px;
+}

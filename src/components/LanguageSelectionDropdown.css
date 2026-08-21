@@ -1,0 +1,76 @@
+.lang-dd {
+  position: relative;
+}
+
+.lang-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 12px 8px 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 14px rgba(70, 50, 20, 0.06);
+}
+
+.lang-dd-btn:focus-visible {
+  outline: 2px solid #2b241c;
+  outline-offset: 2px;
+}
+
+.lang-dd-chevron {
+  width: 6px;
+  height: 6px;
+  border-right: 1.8px solid currentColor;
+  border-bottom: 1.8px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: 0.7;
+}
+
+.lang-dd-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  min-width: 198px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(70, 50, 20, 0.14);
+}
+
+.lang-dd-list button {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-align: start;
+}
+
+.lang-dd-list button:hover,
+.lang-dd-list button.is-active {
+  background: var(--paper);
+}
+
+.lang-dd-native {
+  font-weight: 800;
+}
+
+.lang-dd-en {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
