@@ -31,15 +31,14 @@ export default function App() {
   return (
     <main className="page">
       <header className="intro">
-        <div className="intro-top">
-          <p className="eyebrow">Name the feeling</p>
-          <LanguageSelectionDropdown value={lang} onChange={setLang} />
+        <div className="intro-copy">
+          <h1>Feelings Wheel</h1>
+          <p className="lede">
+            Start in the center, then move outward. Hover for the meaning.
+            Click a slice to keep it.
+          </p>
         </div>
-        <h1>Feelings Wheel</h1>
-        <p className="lede">
-          Start in the center, then move outward. Hover to read the dictionary
-          meaning. Click a slice to keep it for session notes or homework.
-        </p>
+        <LanguageSelectionDropdown value={lang} onChange={setLang} />
       </header>
 
       <div className="workspace">

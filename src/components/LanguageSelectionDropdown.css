@@ -10,10 +10,10 @@
   background: var(--card);
   color: var(--ink);
   border-radius: 999px;
-  padding: 8px 12px 8px 10px;
+  padding: 5px 10px 5px 8px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   box-shadow: 0 4px 14px rgba(70, 50, 20, 0.06);
 }
 
